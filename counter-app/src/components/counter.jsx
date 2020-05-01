@@ -2,17 +2,14 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   state = {
-    count: 1,
-    tags: [],
+    count: 0,
   };
 
   handleIncreament = (product) => {
     console.log(product);
     this.setState({ count: this.state.count + 1 });
   };
-  //   doHandleIncreament = () => {
-  //     this.handleIncreament({ id: 1 });
-  //   };
+
   render() {
     return (
       <React.Fragment>
