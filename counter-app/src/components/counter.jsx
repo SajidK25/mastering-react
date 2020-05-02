@@ -6,12 +6,11 @@ class Counter extends Component {
   };
 
   handleIncreament = (product) => {
-    // console.log(product);
+    this.props.value = 0;
     this.setState({ count: this.state.count + 1 });
   };
 
   render() {
-    // console.log("props:", this.props);
     return (
       <div>
         {this.props.children}
