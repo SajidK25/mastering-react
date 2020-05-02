@@ -6,7 +6,7 @@ class Counter extends Component {
   };
 
   handleIncreament = (product) => {
-    this.props.value = 0;
+    // this.props.value = 0;
     this.setState({ count: this.state.count + 1 });
   };
 
@@ -20,6 +20,13 @@ class Counter extends Component {
           className="btn btn-secondary btn-sm"
         >
           Increament
+        </button>
+        <button
+          className="btn btn-danger btn-sm m-2"
+          onClick={this.props.onDelete}
+        >
+          {" "}
+          Delete
         </button>
       </div>
     );
