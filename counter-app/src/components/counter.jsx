@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 class Counter extends Component {
   render() {
+    console.log("Counter - render");
+
     return (
       <div>
         {this.props.children}
