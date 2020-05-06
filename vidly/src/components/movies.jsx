@@ -3,7 +3,7 @@ import { getMovies } from "../services/fakeMovieService";
 import Like from "../common/like";
 import Pagination from "../common/pagination";
 class Movies extends Component {
-  state = { movies: getMovies(), pageSize: 4 };
+  state = { movies: getMovies(), pageSize: 4, currentPage: 1 };
 
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
@@ -22,6 +22,7 @@ class Movies extends Component {
 
   handlePageChange = (page) => {
     console.log("Page changed", page);
+    this.setState({ currentPage: page });
   };
 
   render() {
@@ -67,8 +68,9 @@ class Movies extends Component {
           </tbody>
           <Pagination
             itemCount={count}
-            pageSize={10}
+            pageSize={this.state.pageSize}
             onPageChange={this.handlePageChange}
+            currentPage={this.state.currentPage}
           />
         </table>
       </React.Fragment>
