@@ -1,4 +1,5 @@
 import React from "react";
+import Pagination from "./pagination";
 
 const Listgroup = (props) => {
   const { items, textProperty, valueProperty } = props;
@@ -12,5 +13,8 @@ const Listgroup = (props) => {
     </ul>
   );
 };
-
+Listgroup.defaultProps = {
+  textProperty: "name",
+  valueProperty: "_id",
+};
 export default Listgroup;
