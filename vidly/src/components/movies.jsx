@@ -9,12 +9,12 @@ class Movies extends Component {
   state = { movies: [], pageSize: 4, currentPage: 1, genres: [] };
 
   componentDidMount() {
-    this.setState({ movies: getMovies });
+    this.setState({ movies: getMovies(), genres: getGenres() });
   }
 
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    this.setState({ movies: movies });
   };
   handleLike = (movie) => {
     console.log("like clicked", movie);
@@ -46,9 +46,11 @@ class Movies extends Component {
 
     return (
       <div className="row">
-        <div className="col-2">
+        <div className="col-3">
           <ListGroup
             items={this.state.genres}
+            textProperty="name"
+            valueProperty="_id"
             onItemSelect={this.handleGenreSelect}
           />
         </div>
