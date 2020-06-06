@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Input from "../common/input";
 
 class LoginForm extends Component {
   username = React.createRef();
@@ -22,30 +23,19 @@ class LoginForm extends Component {
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="from-group">
-            <label htmlFor="username">User Name</label>
-            <input
-              autoFocus
-              value={account.username}
-              name="username"
-              onChange={this.handleChange}
-              ref={this.username}
-              id="username"
-              type="text"
-              className="form-control"
-            />
-          </div>
-          <div className="from-group">
-            <label htmlFor="password">Password</label>
-            <input
-              value={account.password}
-              name="password"
-              onChange={this.handleChange}
-              id="password"
-              type="text"
-              className="form-control"
-            />
-          </div>
+          <Input
+            name="username"
+            value={account.username}
+            onChange={this.handleChange}
+            label="Username"
+          />
+          <Input
+            name="password"
+            value={account.password}
+            onChange={this.handleChange}
+            label="Password"
+          />
+
           <button className="btn btn-primary">Login</button>
         </form>
       </div>
