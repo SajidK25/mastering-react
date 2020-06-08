@@ -6,7 +6,7 @@ import Joi from "joi-browser";
 class LoginForm extends Form {
   username = React.createRef();
   state = {
-    account: { username: "", password: "" },
+    data: { username: "", password: "" },
     errors: {},
   };
   schema = {
@@ -20,29 +20,13 @@ class LoginForm extends Form {
   };
 
   render() {
-    const { account, errors } = this.state;
     return (
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <Input
-            name="username"
-            value={account.username}
-            onChange={this.handleChange}
-            label="Username"
-            errors={errors.username}
-          />
-          <Input
-            name="password"
-            value={account.password}
-            onChange={this.handleChange}
-            label="Password"
-            errors={errors.password}
-          />
-
-          <button disabled={this.validate()} className="btn btn-primary">
-            Login
-          </button>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderButton("Login")}
         </form>
       </div>
     );
