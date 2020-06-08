@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import Form from "../common/Form";
 import Input from "../common/input";
 import Joi from "joi-browser";
 
-class LoginForm extends Component {
+class LoginForm extends Form {
   username = React.createRef();
   state = {
     account: { username: "", password: "" },
@@ -12,40 +13,10 @@ class LoginForm extends Component {
     username: Joi.string().required().label("Username"),
     password: Joi.string().required().label("Password"),
   };
-  validate = () => {
-    const result = Joi.validate(this.state.account, this.schema, {
-      abortEarly: false,
-    });
-    if (!result.error) return null;
-    const errors = {};
-    for (let item of result.error.details) errors[item.path[0]] = item.message;
-    return errors;
-  };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = this.validate();
-    // console.log(errors);
-    this.setState({ errors: errors || {} });
-    if (errors) return;
+
+  doSubmit = () => {
     //call server
     console.log("submitted");
-  };
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    //sub schema
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
-  handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
-
-    const account = { ...this.state.account };
-    account[input.name] = input.value;
-    this.setState({ account, errors });
   };
 
   render() {
