@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import ListGroup from "../common/listGroup";
@@ -6,6 +7,7 @@ import Pagination from "../common/pagination";
 import { paginate } from "../utils/paginate";
 import MovieTable from "./movieTable";
 import _ from "lodash";
+
 class Movies extends Component {
   state = {
     movies: [],
@@ -88,6 +90,13 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
+          <Link
+            to="/movie/new"
+            style={{ marginBottom: 20 }}
+            className="btn btn-primary"
+          >
+            New Movie
+          </Link>
           <p>Showing {totalCount} movies in the database.</p>
           <MovieTable
             movies={movies}
