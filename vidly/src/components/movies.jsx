@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getMovies } from "../services/fakeMovieService";
+import { toast } from "react-toastify";
+import { getMovies, deleteMovie } from "../services/movieService";
 import { getGenres } from "../services/GenreService";
 import ListGroup from "../common/listGroup";
 import Pagination from "../common/pagination";
@@ -23,12 +24,23 @@ class Movies extends Component {
   async componentDidMount() {
     const { data } = await getGenres();
     const genres = [{ _id: "", name: "All Genres" }, ...data];
-    this.setState({ movies: getMovies(), genres: genres });
+    const { data: movies } = await getMovies();
+    this.setState({ movies, genres });
   }
 
-  handleDelete = (movie) => {
+  handleDelete = async (movie) => {
+    const originalMovies = this.state.movies;
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies: movies });
+
+    try {
+      await deleteMovie(movie._id);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        toast.error("This movie has already been deleted");
+        this.setState({ movies: originalMovies });
+      }
+    }
   };
   handleLike = (movie) => {
     console.log("like clicked", movie);
